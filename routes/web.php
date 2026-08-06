@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -76,11 +77,12 @@ Route::name('classes.')->prefix('classes')->group(function () {
     // Halaman Daftar kelas
     Route::get('/', IndexController::class)->name('index');
 
+    // Halaman Tambah kelas 
+    // (Diletakkan di atas {id} agar "create" tidak dibaca sebagai ID)
+    Route::get('/create', CreateController::class)->name('create');
+
     // Halaman Detail kelas
     Route::get('/{id}', ShowController::class)->name('show');
-
-    // Halaman Tambah kelas
-    Route::get('/create', CreateController::class)->name('create');
 
     // Halaman Edit kelas
     Route::get('/{id}/edit', EditController::class)->name('edit');

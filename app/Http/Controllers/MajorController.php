@@ -6,60 +6,51 @@ use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return "Ini adalah halaman daftar major";
+        // Variabel title sesuai konteks halaman
+        $title = 'Sistem Sekolah - Daftar Jurusan';
+
+        // Data dummy jurusan
+        $majors = [
+            [
+                'id' => 1,
+                'code' => 'AKL',
+                'name' => 'Akuntansi dan Keuangan Lembaga',
+                'description' => 'Program keahlian yang membekali murid dengan kompetensi pencatatan dan pelaporan keuangan.',
+            ],
+            [
+                'id' => 2,
+                'code' => 'TKJ',
+                'name' => 'Teknik Komputer dan Jaringan',
+                'description' => 'Program keahlian yang membekali murid dengan kompetensi instalasi, konfigurasi, dan pemeliharaan jaringan komputer.',
+            ],
+            [
+                'id' => 3,
+                'code' => 'BD',
+                'name' => 'Bisnis Digital',
+                'description' => 'Program keahlian yang membekali murid dengan kompetensi pemasaran dan pengelolaan bisnis berbasis digital.',
+            ],
+        ];
+
+        return view('majors.index', compact('title', 'majors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return "Ini adalah halaman tambah major";
+        $title = 'Sistem Sekolah - Tambah Jurusan';
+        return view('majors.create', compact('title'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function edit($id)
     {
-        return "Menambah data major baru";
+        $title = 'Sistem Sekolah - Edit Jurusan';
+        return view('majors.edit', compact('title', 'id'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        return "Menampilkan data major dengan ID: {$id}";
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return "Ini adalah halaman edit major dengan ID: {$id}";
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        return "Mengubah data major dengan ID:{$id}";
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        return "Menghapus data major dengan ID: {$id}";
+        $title = 'Sistem Sekolah - Detail Jurusan';
+        return view('majors.show', compact('title', 'id'));
     }
 }
- 

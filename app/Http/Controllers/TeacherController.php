@@ -8,36 +8,47 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        return "ini adalah halaman daftar guru";
+        $title = 'Sistem Sekolah - Daftar Guru';
+        
+        $teachers = [
+            [
+                'id' => 1,
+                'nip' => '198501012024',
+                'name' => 'Budi Santoso',
+                'gender' => 'Laki-Laki',
+                'subject' => 'Akuntansi Dasar',
+                'phone' => '081234560001',
+                'status' => 'Aktif',
+            ],
+            [
+                'id' => 2,
+                'nip' => '198703152024',
+                'name' => 'Siti Aminah',
+                'gender' => 'Perempuan',
+                'subject' => 'Jaringan Komputer',
+                'phone' => '081234560002',
+                'status' => 'Aktif',
+            ]
+        ];
+
+        return view('teachers.index', compact('title', 'teachers'));
     }
-    
-    public function show(string $id)
-    {
-        return "Menampilkan detail guru dengan ID: {$id}";
-    }
-    
+
     public function create()
     {
-        return "ini adalah halaman tambah guru";
+        $title = 'Sistem Sekolah - Tambah Guru';
+        return view('teachers.create', compact('title'));
     }
-    
-    public function edit(string $id)
+
+    public function edit($id)
     {
-        return "ini adalah halaman edit guru dengan ID: {$id}";
+        $title = 'Sistem Sekolah - Edit Guru';
+        return view('teachers.edit', compact('title', 'id'));
     }
-    
-    public function store()
+
+    public function show($id)
     {
-        return "Melakukan penambahan data guru baru";
-    }
-    
-    public function update(string $id)
-    {
-        return "mengubah data guru dengan ID: {$id}";
-    }
-    
-    public function destroy(string $id)
-    {
-        return "Menghapus data guru dengan ID: {$id}";
+        $title = 'Sistem Sekolah - Detail Guru';
+        return view('teachers.show', compact('title', 'id'));
     }
 }

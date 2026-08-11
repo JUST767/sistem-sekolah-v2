@@ -7,11 +7,21 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
     public function __invoke(Request $request)
     {
-        return "Menambahkan data kelas baru";
+        $classes = session('classes', []);
+        
+        $newClass = [
+            'id' => count($classes) > 0 ? max(array_column($classes, 'id')) + 1 : 1,
+            'name' => $request->name,
+            'grade' => $request->grade ?? '-',
+            'major' => $request->major,
+            'homeroom_teacher' => $request->homeroom_teacher,
+        ];
+
+        $classes[] = $newClass;
+        session(['classes' => $classes]);
+
+        return redirect()->route('classes.index');
     }
 }

@@ -4,41 +4,29 @@
 
 @section('content')
 <div class="bg-white p-6 rounded-lg shadow-sm max-w-2xl mx-auto">
-    <h2 class="text-xl font-semibold text-slate-800 mb-6">Tambah Kelas Baru</h2>
+    <h2 class="text-xl font-semibold text-slate-800 mb-6">Tambah Kelas</h2>
     
     <form action="{{ route('classes.store') }}" method="POST">
+        @csrf
+        
         <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama Kelas</label>
-            <input type="text" name="name" id="name" placeholder="Contoh: XII AKL 1" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
+            <input type="text" name="name" id="name" placeholder="Contoh: XII RPL 1" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="grade" class="block text-sm font-medium text-slate-700 mb-1">Tingkat</label>
+            <input type="text" name="grade" id="grade" placeholder="Contoh: 10 / 11 / 12" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
         </div>
         
         <div class="mb-4">
-            <label for="grade" class="block text-sm font-medium text-slate-700 mb-1">Tingkat</label>
-            <select name="grade" id="grade" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
-                <option value="">-- Pilih Tingkat --</option>
-                <option value="X">X</option>
-                <option value="XI">XI</option>
-                <option value="XII">XII</option>
-            </select>
-        </div>
-
-        <div class="mb-4">
-            <label for="major_id" class="block text-sm font-medium text-slate-700 mb-1">Jurusan</label>
-            <select name="major_id" id="major_id" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
-                <option value="">-- Pilih Jurusan --</option>
-                <option value="1">Akuntansi dan Keuangan Lembaga (AKL)</option>
-                <option value="2">Teknik Komputer dan Jaringan (TKJ)</option>
-                <option value="3">Bisnis Digital (BD)</option>
-            </select>
+            <label for="major" class="block text-sm font-medium text-slate-700 mb-1">Jurusan</label>
+            <input type="text" name="major" id="major" placeholder="Contoh: Rekayasa Perangkat Lunak" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
         </div>
 
         <div class="mb-6">
-            <label for="teacher_id" class="block text-sm font-medium text-slate-700 mb-1">Wali Kelas</label>
-            <select name="teacher_id" id="teacher_id" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
-                <option value="">-- Pilih Wali Kelas --</option>
-                <option value="1">Budi Santoso</option>
-                <option value="2">Siti Aminah</option>
-            </select>
+            <label for="homeroom_teacher" class="block text-sm font-medium text-slate-700 mb-1">Wali Kelas</label>
+            <input type="text" name="homeroom_teacher" id="homeroom_teacher" placeholder="Contoh: Budi Santoso" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
         </div>
 
         <div class="flex gap-3">

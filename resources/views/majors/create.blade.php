@@ -7,6 +7,7 @@
     <h2 class="text-xl font-semibold text-slate-800 mb-6">Tambah Jurusan Baru</h2>
     
     <form action="{{ route('majors.store') }}" method="POST">
+        @csrf
         <!-- Input code -->
         <div class="mb-4">
             <label for="code" class="block text-sm font-medium text-slate-700 mb-1">Kode Jurusan</label>

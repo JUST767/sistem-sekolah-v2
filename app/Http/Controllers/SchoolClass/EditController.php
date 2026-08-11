@@ -3,13 +3,20 @@
 namespace App\Http\Controllers\SchoolClass;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class EditController extends Controller
 {
     public function __invoke($id)
     {
-        $title = 'Sistem Sekolah - Edit Kelas';
-        return view('classes.edit', compact('title', 'id'));
+        $title = 'Ubah Data Kelas';
+        $classes = session('classes', []);
+        
+        $class = collect($classes)->firstWhere('id', (int)$id);
+
+        if (!$class) {
+            return redirect()->route('classes.index');
+        }
+
+        return view('classes.edit', compact('class', 'title', 'id'));
     }
 }

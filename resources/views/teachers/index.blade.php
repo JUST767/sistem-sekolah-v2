@@ -32,9 +32,16 @@
                         <!-- Memanggil Custom Component -->
                         <x-status-badge :status="$teacher['status']" />
                     </td>
-                    <td class="py-3 px-4 text-sm flex gap-3">
+                    <td class="py-3 px-4 text-sm flex gap-3 items-center">
                         <a href="{{ route('teachers.show', $teacher['id']) }}" class="text-blue-600 hover:underline">Lihat</a>
                         <a href="{{ route('teachers.edit', $teacher['id']) }}" class="text-orange-500 hover:underline">Ubah</a>
+                        
+                        <!-- Form untuk tombol Hapus -->
+                        <form action="{{ route('teachers.destroy', $teacher['id']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

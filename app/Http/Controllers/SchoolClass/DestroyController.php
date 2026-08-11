@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class DestroyController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request, string $id)
+    public function __invoke($id)
     {
-        return "menghapus data kelas dengan ID: {$id}";
+        $classes = session('classes', []);
+        
+        $classes = collect($classes)->reject(function ($item) use ($id) {
+            return $item['id'] == $id;
+        })->values()->toArray(); 
+
+        session(['classes' => $classes]);
+
+        return redirect()->route('classes.index');
     }
 }

@@ -7,27 +7,19 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        $title = 'Sistem Sekolah - Daftar Kelas';
-        
-        $classes = [
-            [
-                'id' => 1,
-                'name' => 'XII AKL 1',
-                'grade' => 'XII',
-                'major' => 'AKL',
-                'homeroom_teacher' => 'Budi Santoso'
-            ],
-            [
-                'id' => 2,
-                'name' => 'XII TKJ 1',
-                'grade' => 'XII',
-                'major' => 'TKJ',
-                'homeroom_teacher' => 'Siti Aminah'
-            ]
-        ];
+        $title = 'Daftar Kelas';
 
-        return view('classes.index', compact('title', 'classes'));
+        if (!session()->has('classes')) {
+            $dummyClasses = [
+                ['id' => 1, 'name' => 'X RPL 1', 'major' => 'Rekayasa Perangkat Lunak', 'homeroom_teacher' => 'Budi Santoso'],
+                ['id' => 2, 'name' => 'XI TKJ 1', 'major' => 'Teknik Komputer dan Jaringan', 'homeroom_teacher' => 'Siti Aminah'],
+            ];
+            session(['classes' => $dummyClasses]);
+        }
+
+        $classes = session('classes');
+        return view('classes.index', compact('classes', 'title'));
     }
 }

@@ -26,12 +26,19 @@
                 @foreach($classes as $classItem)
                 <tr class="border-b hover:bg-slate-50">
                     <td class="py-3 px-4 text-sm">{{ $classItem['name'] }}</td>
-                    <td class="py-3 px-4 text-sm">{{ $classItem['grade'] }}</td>
+                    <td class="py-3 px-4 text-sm">{{ $classItem['grade'] ?? '-'}}</td>
                     <td class="py-3 px-4 text-sm">{{ $classItem['major'] }}</td>
                     <td class="py-3 px-4 text-sm">{{ $classItem['homeroom_teacher'] }}</td>
-                    <td class="py-3 px-4 text-sm flex gap-3">
+                   <td class="py-3 px-4 text-sm flex gap-3 items-center">
                         <a href="{{ route('classes.show', $classItem['id']) }}" class="text-blue-600 hover:underline">Lihat</a>
                         <a href="{{ route('classes.edit', $classItem['id']) }}" class="text-orange-500 hover:underline">Ubah</a>
+                        
+                        <!-- Form Tombol Hapus -->
+                        <form action="{{ route('classes.destroy', $classItem['id']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data kelas ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

@@ -9,19 +9,19 @@
     <div class="space-y-4">
         <div>
             <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Nama Kelas</h4>
-            <p class="mt-1 text-slate-800">XII AKL 1</p>
+            <p class="mt-1 text-slate-800 font-bold">{{ $class['name'] }}</p>
         </div>
         <div>
             <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tingkat</h4>
-            <p class="mt-1 text-slate-800">XII</p>
+            <p class="mt-1 text-slate-800">{{ $class['grade'] ?? '-' }}</p>
         </div>
         <div>
             <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Jurusan</h4>
-            <p class="mt-1 text-slate-800">Akuntansi dan Keuangan Lembaga (AKL)</p>
+            <p class="mt-1 text-slate-800">{{ $class['major'] }}</p>
         </div>
         <div>
             <h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Wali Kelas</h4>
-            <p class="mt-1 text-slate-800">Budi Santoso</p>
+            <p class="mt-1 text-slate-800">{{ $class['homeroom_teacher'] }}</p>
         </div>
     </div>
 

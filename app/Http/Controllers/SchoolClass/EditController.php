@@ -17,6 +17,11 @@ class EditController extends Controller
             return redirect()->route('classes.index');
         }
 
-        return view('classes.edit', compact('class', 'title', 'id'));
+        // 1. Ambil data jurusan dan guru dari session
+        $majors = session('majors', []);
+        $teachers = session('teachers', []);
+
+        // 2. Tambahkan 'majors' dan 'teachers' ke dalam compact()
+        return view('classes.edit', compact('class', 'title', 'id', 'majors', 'teachers'));
     }
 }

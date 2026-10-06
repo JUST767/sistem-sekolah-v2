@@ -2,91 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Http\Requests\Student\StoreRequest;   // Import StoreRequest
+use App\Http\Requests\Student\UpdateRequest;  // Import UpdateRequest
 
 class StudentController extends Controller
 {
     public function index()
     {
         $title = "Sistem Sekolah - Daftar Siswa";
-        $students = [
-            [
-                'id' => 1,
-                'nis' => '1001',
-                'name' => 'Andi',
-                'class' => 'XII TKJ 1',
-                'major' => 'TKJ',
-            ],
-
-            [
-                'id' => 2,
-                'nis' => '1002',
-                'name' => 'Budi',
-                'class' => 'XII TKJ 1',
-                'major' => 'TKJ',
-            ],
-
-            [
-                'id' => 3,
-                'nis' => '1003',
-                'name' => 'Nina',
-                'class' => 'XII TKJ 1',
-                'major' => 'TKJ',
-            ],
-        ];
+        $students = Student::select(['id', 'nis', 'name', 'class', 'major'])->get(); 
+        
         return view('students.index', [
             'title' => $title,
             'students' => $students
         ]);
     }
 
-    public function show(string $id)
+    public function show(Student $student)
     {
-        $title = "Sistem Sekolah - Daftar Siswa";
+        $title = 'Sistem Sekolah - Detail Siswa';
+
         return view('students.show', [
             'title' => $title,
+            'student' => $student
         ]);
     }
 
     public function create()
     {
-        $title = "Sistem Sekolah - Daftar Siswa";
+        $title = 'Sistem Sekolah - Tambah Siswa';
         return view('students.create', [
             'title' => $title,
         ]);
     }
 
-
-    public function edit(string $id)
+    public function edit(Student $student)
     {
-         $title = "Sistem Sekolah - Daftar Siswa";
+        $title = 'Sistem Sekolah - Ubah Siswa';
         return view('students.edit', [
             'title' => $title,
+            'student' => $student
         ]);
     }
 
-    public function store()
+    public function store(StoreRequest $request) // Gunakan StoreRequest di sini
     {
-       $title = "Sistem Sekolah - Daftar Siswa";
-        return view('students.store', [
-            'title' => $title,
-        ]);
+        // Validasi otomatis dijalankan oleh class StoreRequest
+        $validatedRequest = $request->validated();
+
+        // Simpan data
+        Student::create($validatedRequest);
+
+        return redirect()->route('students.index');
     }
 
-    public function update(string $id)
+    public function update(Student $student, UpdateRequest $request)
     {
-        $title = "Sistem Sekolah - Daftar Siswa";
-        return view('students.update', [
-            'title' => $title,
-        ]);
+        // Validasi otomatis dijalankan oleh class UpdateRequest
+        $validatedRequest = $request->validated();
+
+        // Update Data
+        $student->update($validatedRequest);
+
+        return redirect()->route('students.index');
     }
 
-    public function destroy(string $id)
+    public function destroy(Student $student) // Beri spasi antara Student dan $student
     {
-        $title = "Sistem Sekolah - Daftar Siswa";
-        return view('students.destroy', [
-            'title' => $title,
-        ]);
+        // Jalankan perintah hapus
+        $student->delete();
+        
+        return redirect()->route('students.index');
     }
 }
-

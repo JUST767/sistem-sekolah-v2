@@ -1,9 +1,12 @@
-@if($status == 'Aktif')
-    <span class="px-3 py-1 text-xs font-semibold text-green-800 bg-green-200 rounded-full">
-        {{ $status }}
-    </span>
-@else
-    <span class="px-3 py-1 text-xs font-semibold text-red-800 bg-red-200 rounded-full">
-        {{ $status }}
-    </span>
-@endif
+@props(['status'])
+
+@php
+    $isActive = strtolower($status) === 'aktif';
+    $colorClass = $isActive ? 'text-green-600' : 'text-red-600';
+    $dotClass = $isActive ? 'bg-green-500' : 'bg-red-500';
+@endphp
+
+<div class="flex items-center gap-2 {{ $colorClass }} font-medium text-sm">
+    <span class="w-1.5 h-1.5 rounded-full {{ $dotClass }}"></span>
+    {{ $status }}
+</div>

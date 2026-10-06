@@ -18,8 +18,8 @@ class UpdateController extends Controller
         if ($index !== false) {
             $classes[$index]['name'] = $request->name;
             $classes[$index]['grade'] = $request->grade ?? $classes[$index]['grade'] ?? '-';
-            $classes[$index]['major'] = $request->major;
-            $classes[$index]['homeroom_teacher'] = $request->homeroom_teacher;
+            $classes[$index]['major'] = $request->major_id;
+            $classes[$index]['homeroom_teacher'] = $request->teacher_id;
 
             session(['classes' => $classes]);
         }

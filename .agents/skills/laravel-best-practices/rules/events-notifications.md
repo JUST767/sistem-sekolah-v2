@@ -1,3 +1,4 @@
+
 # Events & Notifications Best Practices
 
 ## Rely on Event Discovery

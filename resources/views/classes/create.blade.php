@@ -1,37 +1,58 @@
 @extends('layouts.app')
-
-@section('title', $title)
+@section('title', $title ?? 'Tambah Kelas')
 
 @section('content')
-<div class="bg-white p-6 rounded-lg shadow-sm max-w-2xl mx-auto">
-    <h2 class="text-xl font-semibold text-slate-800 mb-6">Tambah Kelas</h2>
-    
+<div class="mb-8">
+    <p class="text-[11px] text-yellow-600 font-bold tracking-widest uppercase mb-1">Data Kelas</p>
+    <h2 class="text-3xl font-bold text-[#151b2b]">Tambah Kelas</h2>
+    <p class="text-sm text-slate-500 mt-1">Mencatat kelas baru ke dalam sistem.</p>
+</div>
+
+<div class="bg-white border border-slate-200 p-8 max-w-3xl">
     <form action="{{ route('classes.store') }}" method="POST">
         @csrf
         
-        <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama Kelas</label>
-            <input type="text" name="name" id="name" placeholder="Contoh: XII RPL 1" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
+        <div class="mb-5">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Nama Kelas</label>
+            <input type="text" name="name" class="w-full border border-slate-300 px-4 py-2.5 text-sm focus:border-[#151b2b] focus:ring-0" placeholder="Contoh: XII AKL 1" required>
         </div>
 
-        <div class="mb-4">
-            <label for="grade" class="block text-sm font-medium text-slate-700 mb-1">Tingkat</label>
-            <input type="text" name="grade" id="grade" placeholder="Contoh: 10 / 11 / 12" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
-        </div>
-        
-        <div class="mb-4">
-            <label for="major" class="block text-sm font-medium text-slate-700 mb-1">Jurusan</label>
-            <input type="text" name="major" id="major" placeholder="Contoh: Rekayasa Perangkat Lunak" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
-        </div>
-
-        <div class="mb-6">
-            <label for="homeroom_teacher" class="block text-sm font-medium text-slate-700 mb-1">Wali Kelas</label>
-            <input type="text" name="homeroom_teacher" id="homeroom_teacher" placeholder="Contoh: Budi Santoso" class="w-full border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-500" required>
+        <div class="mb-5">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Tingkat</label>
+            <select name="grade" class="w-full border border-slate-300 px-4 py-2.5 text-sm focus:border-[#151b2b] focus:ring-0" required>
+                <option value="">Pilih Tingkat...</option>
+                <option value="X">X</option>
+                <option value="XI">XI</option>
+                <option value="XII">XII</option>
+            </select>
         </div>
 
-        <div class="flex gap-3">
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">Simpan</button>
-            <a href="{{ route('classes.index') }}" class="bg-slate-200 text-slate-700 px-4 py-2 rounded-md hover:bg-slate-300 text-sm">Batal</a>
+        <!-- Opsi Manual Jurusan -->
+        <div class="mb-5">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Jurusan</label>
+            <select name="major_id" class="w-full border border-slate-300 px-4 py-2.5 text-sm focus:border-[#151b2b] focus:ring-0" required>
+                <option value="">Pilih Jurusan...</option>
+                <option value="1">Teknik Komputer dan Jaringan (TKJ)</option>
+                <option value="2">Akuntansi dan Keuangan Lembaga (AKL)</option>
+                <option value="3">Bisnis Digital (BID)</option>
+            </select>
+        </div>
+
+        <!-- Opsi Manual Wali Kelas -->
+        <div class="mb-8">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-2">Wali Kelas</label>
+            <select name="teacher_id" class="w-full border border-slate-300 px-4 py-2.5 text-sm focus:border-[#151b2b] focus:ring-0" required>
+                <option value="">Pilih Wali Kelas...</option>
+                <option value="1">Budi Santoso</option>
+                <option value="2">Siti Aminah</option>
+            </select>
+        </div>
+
+        <div class="flex justify-end items-center gap-4 border-t border-slate-100 pt-6">
+            <a href="{{ route('classes.index') }}" class="text-sm font-medium text-slate-500 hover:text-slate-800">Batal</a>
+            <button type="submit" class="bg-[#151b2b] text-white px-6 py-2.5 text-sm font-semibold hover:bg-slate-800 transition-colors">
+                Simpan Kelas
+            </button>
         </div>
     </form>
 </div>

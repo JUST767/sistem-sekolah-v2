@@ -116,7 +116,7 @@ class TeacherController extends Controller
             $teachers[$index]['name'] = $request->name;
             $teachers[$index]['gender'] = $request->gender;
             $teachers[$index]['subject'] = $request->subject;
-            $teachers[$index]['phone'] = $request->phone;
+            $teachers[$index]['phone_number'] = $request->phone_number;
             $teachers[$index]['status'] = $request->status;
 
             // Simpan kembali daftar yang sudah diperbarui ke Session

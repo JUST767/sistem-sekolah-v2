@@ -10,6 +10,8 @@ class CreateController extends Controller
     public function __invoke()
     {
         $title = 'Tambah Kelas';
+        $majors = session('majors', []);
+        $teachers = session('teachers', []);
         return view('classes.create', compact('title'));
     }
 }

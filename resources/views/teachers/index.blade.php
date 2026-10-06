@@ -1,52 +1,57 @@
 @extends('layouts.app')
-
 @section('title', $title)
 
 @section('content')
-<div class="bg-white p-6 rounded-lg shadow-sm">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold text-slate-800">Daftar Guru</h2>
-        <a href="{{ route('teachers.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 text-sm">
-            + Tambah Guru
+    <div class="mb-8 flex justify-between items-end">
+        <div>
+            <p class="text-[11px] text-yellow-600 font-bold tracking-widest uppercase mb-1">Tahun Ajaran 2025/2026</p>
+            <h2 class="text-3xl font-bold text-[#151b2b]">Daftar Guru</h2>
+        </div>
+        <a href="{{ route('teachers.create') }}"
+            class="bg-[#151b2b] text-white px-5 py-2.5 text-sm font-semibold hover:bg-slate-800 transition-colors">
+            Catat Guru Baru
         </a>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-            <thead>
-                <tr class="border-b bg-slate-50">
-                    <th class="py-3 px-4 font-medium text-slate-600 text-sm">NIP</th>
-                    <th class="py-3 px-4 font-medium text-slate-600 text-sm">Nama Lengkap</th>
-                    <th class="py-3 px-4 font-medium text-slate-600 text-sm">Mata Pelajaran</th>
-                    <th class="py-3 px-4 font-medium text-slate-600 text-sm">Status</th>
-                    <th class="py-3 px-4 font-medium text-slate-600 text-sm">Aksi</th>
+    <div class="bg-white border border-slate-200">
+        <table class="w-full text-left text-sm">
+            <thead class="border-y border-slate-300 bg-white text-slate-600 text-xs font-bold uppercase tracking-wider">
+                <tr>
+                    <th class="px-6 py-4">No.</th>
+                    <th class="px-6 py-4">NIP</th>
+                    <th class="px-6 py-4">Nama Guru</th>
+                    <th class="px-6 py-4">Jenis Kelamin</th>
+                    <th class="px-6 py-4">Mata Pelajaran</th>
+                    <th class="px-6 py-4">Status</th>
+                    <th class="px-6 py-4 text-center">Tindakan</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach($teachers as $teacher)
-                <tr class="border-b hover:bg-slate-50">
-                    <td class="py-3 px-4 text-sm">{{ $teacher['nip'] }}</td>
-                    <td class="py-3 px-4 text-sm">{{ $teacher['name'] }}</td>
-                    <td class="py-3 px-4 text-sm">{{ $teacher['subject'] }}</td>
-                    <td class="py-3 px-4 text-sm">
-                        <!-- Memanggil Custom Component -->
-                        <x-status-badge :status="$teacher['status']" />
-                    </td>
-                    <td class="py-3 px-4 text-sm flex gap-3 items-center">
-                        <a href="{{ route('teachers.show', $teacher['id']) }}" class="text-blue-600 hover:underline">Lihat</a>
-                        <a href="{{ route('teachers.edit', $teacher['id']) }}" class="text-orange-500 hover:underline">Ubah</a>
-                        
-                        <!-- Form untuk tombol Hapus -->
-                        <form action="{{ route('teachers.destroy', $teacher['id']) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:underline">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+                @foreach($teachers as $index => $teacher)
+                    <tr>
+                        <td class="px-6 py-4">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4">{{ $teacher['nip'] ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $teacher['name'] ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $teacher['gender'] ?? '-' }}</td>
+                        <td class="px-6 py-4">{{ $teacher['subject'] ?? '-' }}</td>
+                        <td class="px-6 py-4">
+                            <!-- Pemanggilan custom component badge -->
+                            <x-status-badge :status="$teacher['status']" />
+                        </td>
+                        <td class="px-6 py-4 text-xs font-medium flex justify-center gap-4">
+                            <a href="{{ route('teachers.show', ['id' => $teacher['id']]) }}"
+                                class="text-slate-700 hover:underline">Lihat</a>
+                            <a href="{{ route('teachers.edit', ['id' => $teacher['id']]) }}"
+                                class="text-slate-700 hover:underline">Ubah</a>
+                            <form action="{{ route('teachers.destroy', ['id' => $teacher['id']]) }}" method="POST"
+                                class="inline">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-</div>
 @endsection

@@ -15,8 +15,8 @@ class StoreController extends Controller
             'id' => count($classes) > 0 ? max(array_column($classes, 'id')) + 1 : 1,
             'name' => $request->name,
             'grade' => $request->grade ?? '-',
-            'major' => $request->major,
-            'homeroom_teacher' => $request->homeroom_teacher,
+            'major' => $request->major_id,
+            'homeroom_teacher' => $request->teacher_id,
         ];
 
         $classes[] = $newClass;
